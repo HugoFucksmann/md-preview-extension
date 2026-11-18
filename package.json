@@ -1,0 +1,108 @@
+{
+  "name": "md-preview-default",
+  "displayName": "MD Preview Default",
+  "description": "Abre los .md renderizados por defecto, con botón para alternar a Source en la misma pestaña.",
+  "version": "0.1.3",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "mdPreview.editor",
+        "displayName": "Markdown Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.md"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "configuration": {
+      "title": "MD Preview Default",
+      "properties": {
+        "mdPreview.fontSize": {
+          "type": "number",
+          "default": 15,
+          "minimum": 10,
+          "maximum": 40,
+          "description": "Tamaño de letra del Preview, en px."
+        },
+        "mdPreview.contentWidth": {
+          "type": "number",
+          "default": 920,
+          "minimum": 0,
+          "description": "Ancho máximo del contenido del Preview, en px. 0 = ancho completo."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "mdPreview.toggle",
+        "title": "Markdown: Alternar Preview/Source"
+      },
+      {
+        "command": "mdPreview.showSource",
+        "title": "Markdown: Ver Source",
+        "icon": "$(code)"
+      },
+      {
+        "command": "mdPreview.showPreview",
+        "title": "Markdown: Ver Preview",
+        "icon": "$(open-preview)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "mdPreview.toggle",
+        "key": "ctrl+alt+m",
+        "mac": "cmd+alt+m",
+        "when": "activeCustomEditorId == mdPreview.editor || resourceExtname == .md"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "mdPreview.showSource",
+          "when": "activeCustomEditorId == mdPreview.editor",
+          "group": "navigation@1"
+        },
+        {
+          "command": "mdPreview.showPreview",
+          "when": "resourceExtname == .md && activeCustomEditorId != mdPreview.editor",
+          "group": "navigation@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node scripts/copy-assets.js && tsc -p .",
+    "watch": "tsc -watch -p .",
+    "package": "npm run build && vsce package --allow-missing-repository --skip-license"
+  },
+  "dependencies": {
+    "@vscode/markdown-it-katex": "^1.1.1",
+    "highlight.js": "^11.10.0",
+    "katex": "^0.16.11",
+    "markdown-it": "^14.1.0",
+    "markdown-it-deflist": "^3.0.0",
+    "markdown-it-emoji": "^2.0.2",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "sanitize-html": "^2.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "mermaid": "^11.4.0",
+    "typescript": "^5.4.0"
+  }
+}

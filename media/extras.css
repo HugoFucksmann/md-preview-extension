@@ -1,0 +1,81 @@
+/* Estilos de las funciones nuevas: imágenes ampliables, fórmulas, notas al pie, definiciones. */
+
+/* ---------- imágenes ampliables ---------- */
+#content img {
+  cursor: zoom-in;
+}
+
+#content a img {
+  cursor: pointer;
+}
+
+.img-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  background: color-mix(in srgb, var(--vscode-editor-background) 96%, transparent);
+}
+
+.img-viewer.grabbing {
+  cursor: grabbing;
+}
+
+.img-viewer img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: none;
+  width: auto;
+  height: auto;
+  visibility: hidden;
+  -webkit-user-drag: none;
+}
+
+/* ---------- fórmulas (KaTeX) ---------- */
+div.md-math {
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+div.md-math .katex-display {
+  margin: 0;
+}
+
+/* ---------- notas al pie ---------- */
+.footnotes-sep {
+  display: none;
+}
+
+.footnotes {
+  margin-top: 2.5em;
+  padding-top: 0.4em;
+  border-top: 1px solid var(--vscode-panel-border);
+  font-size: 0.9em;
+  color: var(--vscode-descriptionForeground);
+}
+
+.footnote-ref {
+  font-size: 0.75em;
+}
+
+.footnote-backref {
+  margin-left: 0.3em;
+}
+
+/* ---------- listas de definiciones ---------- */
+dt {
+  margin-top: 0.8em;
+  font-weight: 600;
+  color: var(--c-h3);
+}
+
+dd {
+  margin: 0.2em 0 0.2em 1.6em;
+  padding-left: 0.8em;
+  border-left: 2px solid color-mix(in srgb, var(--c-h3) 40%, transparent);
+}
